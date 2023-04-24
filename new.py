@@ -4,7 +4,7 @@ import os
 from sklearn import svm
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-
+import skimage.io as io
 import os
 import numpy as np
 from skimage import feature
@@ -20,6 +20,7 @@ images = []
 labels = []
 descriptors = []
 features=[]
+arr=[]
 # Define the HOG parameters
 pixels_per_cell = (8, 8)
 cells_per_block = (2, 2)
@@ -36,37 +37,73 @@ for sub_dir in os.listdir(dataset_dir):
         image_path = os.path.join(sub_dir_path, file_name)
 
         # Load the image and compute its HOG features
-        image = np.asarray(Image.open(image_path).convert("L"))
+        image = np.asarray(Image.open(image_path))
+        # print(image)
+        # cv2.imshow("image",image)
+        # break
+        # image = np.asarray(Image.open(image_path).convert("L"))
+        num_channels = image.shape[-1]
+        # image = cv2.cvtColor(image, cv2.COLOR_RGBA2RGB)
+        # blur = cv2.GaussianBlur(image, (3,3), 0)
+    
+        # print(('im',(image)))
+        # print(('blur',(blur)))
+        # print((np.min(blur)))
+        # print((np.max(blur)))
+        # Change color-space from BGR -> HSV
+        
+        # if num_channels == 3:
+        #     # hsv = cv2.cvtColor(blur, cv2.COLOR_RGB2HSV)
+        #      hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2YCR_CB)
+        # else:
+        #      hsv = cv2.cvtColor(blur, cv2.COLOR_BGRA2YCR_CB)
+            # hsv = cv2.cvtColor(blur, cv2.COLOR_RGBA2HSV) # Already grayscale
+        # hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2YCR_CB)
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        print(image.shape)
+        hsv= cv2.cvtColor(image, cv2.COLOR_BGR2HSV) 
+        # hsv = cv2.cvtColor(blur, cv2.COLOR_RGB2HSV)
+        print(('hsv',(hsv)))
+        print((np.min(hsv)))
+        print((np.max(hsv)))
+        image = cv2.inRange(hsv,  np.array([0,40,30],dtype="uint8"),  np.array([43,255,254],dtype="uint8"))
+        cv2.imshow("image",image)
+        print(('image',(image)))
+        print((np.min(image)))
+        print((np.max(image)))
+        arr.append(image)
+    
         # image = cv2.resize(image, (600,400))
         sift = cv2.SIFT_create()
         # surf = cv2.xfeatures2d.SURF_create(128)
 
-        num_channels = image.shape[-1]
-
+    
+       
         # Convert the image to grayscale if it has three channels
-        if num_channels == 3:
-            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        else:
-            gray = image  # Already grayscale
+        # if num_channels == 3:
+        #     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        # else:
+        #     gray = image  # Already grayscale
         kp, des = sift.detectAndCompute(gray, None)
+        # print(kp[0].pt[0])
 
         if des is not None:
          mean=np.mean(des,axis=0)
          descriptors.append(mean)
          labels.append(sub_dir)
-        hog_features = feature.hog(image, pixels_per_cell=pixels_per_cell,
-                                cells_per_block=cells_per_block,
-                                orientations=num_orientations)
+    #     hog_features = feature.hog(image, pixels_per_cell=pixels_per_cell,
+    #                             cells_per_block=cells_per_block,
+    #                             orientations=num_orientations)
 
-    # Add the HOG features and label to the lists
-        features.append(hog_features)
+    # # Add the HOG features and label to the lists
+    #     features.append(hog_features)
 # descriptors = np.vstack(descriptors)
         # descriptors.append(des)
 descriptors = np.array(descriptors)
-features = np.array(features)
-total=np.concatenate((descriptors, features), axis=1)
-print('hog',features)
-print('hof shape',features.shape)
+# features = np.array(features)
+# total=np.concatenate((descriptors, features), axis=1)
+# print('hog',features)
+# print('hof shape',features.shape)
 # surf_des=np.array(surf_des)
 labels = np.array(labels) 
 # print(surf_des.shape)
@@ -84,7 +121,7 @@ print('sift',descriptors)
 # labels = np.array(labels)
 # Split the dataset into training and testing sets
 train_features, test_features, train_labels, test_labels = train_test_split(
-    total, labels, test_size=0.25, random_state=42)
+    descriptors, labels, test_size=0.25, random_state=42)
 
 print('Shape of train_images:', train_features.shape)
 print('Shape of train_labels:', train_labels.shape)
