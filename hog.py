@@ -37,11 +37,11 @@ for sub_dir in os.listdir(dataset_dir):
         image_path = os.path.join(sub_dir_path, file_name)
 
         # Load the image and compute its HOG features
-        image = np.asarray(Image.open(image_path))
+        # image = np.asarray(Image.open(image_path))
         # print(image)
         # cv2.imshow("image",image)
         # break
-        # image = np.asarray(Image.open(image_path).convert("L"))
+        image = np.asarray(Image.open(image_path).convert("L"))
         # num_channels = image.shape[-1]
         # # image = cv2.cvtColor(image, cv2.COLOR_RGBA2RGB)
         # # blur = cv2.GaussianBlur(image, (3,3), 0)
@@ -90,8 +90,8 @@ for sub_dir in os.listdir(dataset_dir):
         # if des is not None:
         #  mean=np.mean(des,axis=0)
         #  descriptors.append(mean)
-        #  labels.append(sub_dir)
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        labels.append(sub_dir)
+        # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         hog_features = feature.hog(image, pixels_per_cell=pixels_per_cell,
                                 cells_per_block=cells_per_block,
                                 orientations=num_orientations)
@@ -100,7 +100,7 @@ for sub_dir in os.listdir(dataset_dir):
         features.append(hog_features)
 # descriptors = np.vstack(descriptors)
         # descriptors.append(des)
-descriptors = np.array(descriptors)
+# descriptors = np.array(descriptors)
 features = np.array(features)
 # total=np.concatenate((descriptors, features), axis=1)
 # print('hog',features)
@@ -112,9 +112,9 @@ labels = np.array(labels)
 # descriptors = np.reshape(descriptors, (len(labels), -1))
    
 
-print('sift shape',descriptors.shape)
+# print('sift shape',descriptors.shape)
 print(labels.shape)
-print('sift',descriptors)
+# print('sift',descriptors)
 # for image in images:
 #     kp, des = sift.detectAndCompute(image, None)
 #     descriptors.append(des)
