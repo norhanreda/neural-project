@@ -15,7 +15,7 @@ from PIL import Image
 import cv2
 from skimage.feature import local_binary_pattern
 # Define the directory where the hand gesture images are stored
-dataset_dir = "dataset_sample\Women"
+dataset_dir = "dataset\dataset\Woman"
 images = []
 labels = []
 descriptors = []
