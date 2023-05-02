@@ -14,6 +14,7 @@ from sklearn.metrics import accuracy_score
 from PIL import Image
 import cv2
 from skimage.feature import local_binary_pattern
+from sklearn.decomposition import PCA
 # Define the directory where the hand gesture images are stored
 dataset_dir = "dataset_sample\Women"
 images = []
@@ -94,8 +95,11 @@ for sub_dir in os.listdir(dataset_dir):
         # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         hog_features = feature.hog(image, pixels_per_cell=pixels_per_cell,
                                 cells_per_block=cells_per_block,
-                                orientations=num_orientations)
-
+                                orientations=num_orientations ,visualize=True)
+        # hog_features=np.concatenate(hog_features)
+        pca = PCA(n_components=50)
+        # print(des)
+        hog_features = pca.fit_transform(hog_features.reshape(1,-1))
     # # Add the HOG features and label to the lists
         features.append(hog_features)
 # descriptors = np.vstack(descriptors)

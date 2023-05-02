@@ -59,19 +59,38 @@ for sub_dir in os.listdir(dataset_dir):
         #      hsv = cv2.cvtColor(blur, cv2.COLOR_BGRA2YCR_CB)
             # hsv = cv2.cvtColor(blur, cv2.COLOR_RGBA2HSV) # Already grayscale
         # hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2YCR_CB)
+        # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        # Convert the image to grayscale
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        print(image.shape)
-        hsv= cv2.cvtColor(image, cv2.COLOR_BGR2HSV) 
-        # hsv = cv2.cvtColor(blur, cv2.COLOR_RGB2HSV)
-        print(('hsv',(hsv)))
-        print((np.min(hsv)))
-        print((np.max(hsv)))
-        image = cv2.inRange(hsv,  np.array([0,40,30],dtype="uint8"),  np.array([43,255,254],dtype="uint8"))
-        cv2.imshow("image",image)
-        print(('image',(image)))
-        print((np.min(image)))
-        print((np.max(image)))
-        arr.append(image)
+
+        # Apply adaptive thresholding to the grayscale image
+        thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
+
+        # Apply a median blur to the thresholded image to remove noise
+        blur = cv2.medianBlur(thresh, 7)
+
+        # Convert the image to the YCrCb color space
+        ycrcb = cv2.cvtColor(image, cv2.COLOR_BGR2YCrCb)
+
+        # Apply a skin color range filter to the YCrCb image
+        lower_skin = np.array([0, 135, 85])
+        upper_skin = np.array([255, 180, 135])
+        mask = cv2.inRange(ycrcb, lower_skin, upper_skin)
+
+        # Combine the thresholded image and the skin color mask
+        hand = cv2.bitwise_and(blur, blur, mask=mask)
+        # print(image.shape)
+        # hsv= cv2.cvtColor(image, cv2.COLOR_BGR2HSV) 
+        # # hsv = cv2.cvtColor(blur, cv2.COLOR_RGB2HSV)
+        # print(('hsv',(hsv)))
+        # print((np.min(hsv)))
+        # print((np.max(hsv)))
+        # image = cv2.inRange(hsv,  np.array([0,40,30],dtype="uint8"),  np.array([43,255,254],dtype="uint8"))
+        # cv2.imshow("image",image)
+        # print(('image',(image)))
+        # print((np.min(image)))
+        # print((np.max(image)))
+        # arr.append(image)
     
         # image = cv2.resize(image, (600,400))
         sift = cv2.SIFT_create()
@@ -84,7 +103,7 @@ for sub_dir in os.listdir(dataset_dir):
         #     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         # else:
         #     gray = image  # Already grayscale
-        kp, des = sift.detectAndCompute(gray, None)
+        kp, des = sift.detectAndCompute(mask , None)
         # print(kp[0].pt[0])
 
         if des is not None:
