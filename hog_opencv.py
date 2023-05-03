@@ -14,8 +14,9 @@ from sklearn.metrics import accuracy_score
 from PIL import Image
 import cv2
 from skimage.feature import local_binary_pattern
+from sklearn.decomposition import PCA
 # Define the directory where the hand gesture images are stored
-dataset_dir = "dataset_sample\Women"
+dataset_dir = "dataset\dataset\Woman"
 images = []
 labels = []
 descriptors = []
@@ -37,39 +38,17 @@ for sub_dir in os.listdir(dataset_dir):
         image_path = os.path.join(sub_dir_path, file_name)
 
         # Load the image and compute its HOG features
-        image = np.asarray(Image.open(image_path))
-        # print(image)
-        # cv2.imshow("image",image)
-        # break
-        # image = np.asarray(Image.open(image_path).convert("L"))
-        num_channels = image.shape[-1]
-        # image = cv2.cvtColor(image, cv2.COLOR_RGBA2RGB)
-        # blur = cv2.GaussianBlur(image, (3,3), 0)
-    
-        # print(('im',(image)))
-        # print(('blur',(blur)))
-        # print((np.min(blur)))
-        # print((np.max(blur)))
-        # Change color-space from BGR -> HSV
-        
-        # if num_channels == 3:
-        #     # hsv = cv2.cvtColor(blur, cv2.COLOR_RGB2HSV)
-        #      hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2YCR_CB)
-        # else:
-        #      hsv = cv2.cvtColor(blur, cv2.COLOR_BGRA2YCR_CB)
-            # hsv = cv2.cvtColor(blur, cv2.COLOR_RGBA2HSV) # Already grayscale
-        # hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2YCR_CB)
-        # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        # Convert the image to grayscale
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        # image = np.asarray(Image.open(image_path))
+        image = cv2.imread(image_path)
+        image= cv2.resize(image,(128,128))
+        # cv2.namedWindow('mask', cv2.WINDOW_NORMAL)
+        # cv2.resizeWindow('mask', 800, 600)
+        # cv2.imshow('mask', image) 
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
 
-        # Apply adaptive thresholding to the grayscale image
-        thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
+        # image = cv2.resize(image, (256, 256))
 
-        # Apply a median blur to the thresholded image to remove noise
-        blur = cv2.medianBlur(thresh, 7)
-
-        # Convert the image to the YCrCb color space
         ycrcb = cv2.cvtColor(image, cv2.COLOR_BGR2YCrCb)
 
         # Apply a skin color range filter to the YCrCb image
@@ -77,50 +56,33 @@ for sub_dir in os.listdir(dataset_dir):
         upper_skin = np.array([255, 180, 135])
         mask = cv2.inRange(ycrcb, lower_skin, upper_skin)
 
-        # Combine the thresholded image and the skin color mask
-        hand = cv2.bitwise_and(blur, blur, mask=mask)
-        # print(image.shape)
-        # hsv= cv2.cvtColor(image, cv2.COLOR_BGR2HSV) 
-        # # hsv = cv2.cvtColor(blur, cv2.COLOR_RGB2HSV)
-        # print(('hsv',(hsv)))
-        # print((np.min(hsv)))
-        # print((np.max(hsv)))
-        # image = cv2.inRange(hsv,  np.array([0,40,30],dtype="uint8"),  np.array([43,255,254],dtype="uint8"))
-        # cv2.imshow("image",image)
-        # print(('image',(image)))
-        # print((np.min(image)))
-        # print((np.max(image)))
-        # arr.append(image)
-    
-        # image = cv2.resize(image, (600,400))
-        sift = cv2.SIFT_create()
-        # surf = cv2.xfeatures2d.SURF_create(128)
-
-    
-       
-        # Convert the image to grayscale if it has three channels
-        # if num_channels == 3:
-        #     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        # else:
-        #     gray = image  # Already grayscale
-        kp, des = sift.detectAndCompute(mask , None)
-        # print(kp[0].pt[0])
-
-        if des is not None:
-         mean=np.mean(des,axis=0)
-         descriptors.append(mean)
-        #  descriptors.append(des)
-         labels.append(sub_dir)
-    #     hog_features = feature.hog(image, pixels_per_cell=pixels_per_cell,
-    #                             cells_per_block=cells_per_block,
-    #                             orientations=num_orientations)
-
-    # # Add the HOG features and label to the lists
-    #     features.append(hog_features)
+        # cv2.namedWindow('mask', cv2.WINDOW_NORMAL)
+        # cv2.resizeWindow('mask', 800, 600)
+        # cv2.imshow('mask', mask) 
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
+         # Define HOG parameters
+        win_size = (64, 64)
+        block_size = (16, 16)
+        block_stride = (8, 8)
+        cell_size = (8, 8)
+        nbins = 9
+        # Initialize HOG descriptor
+        hog = cv2.HOGDescriptor(win_size, block_size, block_stride, cell_size, nbins)
+        # Compute HOG features
+        hog_features = hog.compute(mask)
+        # print(hog_features.shape)
+        # print(hog_features)
+        features.append(hog_features)
+        print(sub_dir)
+        labels.append(sub_dir)
+        
+        
+        
 # descriptors = np.vstack(descriptors)
         # descriptors.append(des)
-descriptors = np.array(descriptors)
-# features = np.array(features)
+# descriptors = np.array(descriptors)
+features = np.array(features)
 # total=np.concatenate((descriptors, features), axis=1)
 # print('hog',features)
 # print('hof shape',features.shape)
@@ -131,9 +93,9 @@ labels = np.array(labels)
 # descriptors = np.reshape(descriptors, (len(labels), -1))
    
 
-print('sift shape',descriptors.shape)
+# print('sift shape',descriptors.shape)
 print(labels.shape)
-print('sift',descriptors)
+# print('sift',descriptors)
 # for image in images:
 #     kp, des = sift.detectAndCompute(image, None)
 #     descriptors.append(des)
@@ -141,7 +103,7 @@ print('sift',descriptors)
 # labels = np.array(labels)
 # Split the dataset into training and testing sets
 train_features, test_features, train_labels, test_labels = train_test_split(
-    descriptors, labels, test_size=0.25, random_state=42)
+    features, labels, test_size=0.25, random_state=42)
 
 print('Shape of train_images:', train_features.shape)
 print('Shape of train_labels:', train_labels.shape)

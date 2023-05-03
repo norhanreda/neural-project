@@ -43,6 +43,7 @@ for sub_dir in os.listdir(dataset_dir):
         # cv2.imshow("image",image)
         # break
         image = np.asarray(Image.open(image_path).convert("L"))
+
         # num_channels = image.shape[-1]
         # # image = cv2.cvtColor(image, cv2.COLOR_RGBA2RGB)
         # # blur = cv2.GaussianBlur(image, (3,3), 0)
@@ -91,16 +92,38 @@ for sub_dir in os.listdir(dataset_dir):
         # if des is not None:
         #  mean=np.mean(des,axis=0)
         #  descriptors.append(mean)
+        # Convert the image to grayscale
+        # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+        # # Apply adaptive thresholding to the grayscale image
+        # thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
+
+        # # Apply a median blur to the thresholded image to remove noise
+        # blur = cv2.medianBlur(thresh, 7)
+
+        # # Convert the image to the YCrCb color space
+        # ycrcb = cv2.cvtColor(image, cv2.COLOR_BGR2YCrCb)
+
+        # # Apply a skin color range filter to the YCrCb image
+        # lower_skin = np.array([0, 135, 85])
+        # upper_skin = np.array([255, 180, 135])
+        # mask = cv2.inRange(ycrcb, lower_skin, upper_skin)
+        # print(mask)
         labels.append(sub_dir)
         # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         hog_features = feature.hog(image, pixels_per_cell=pixels_per_cell,
                                 cells_per_block=cells_per_block,
                                 orientations=num_orientations ,visualize=True)
+        # print(len(hog_features))
+        # hog_features = np.array(hog_features)
         # hog_features=np.concatenate(hog_features)
-        pca = PCA(n_components=50)
+
+        # pca = PCA(n_components=50)
         # print(des)
-        hog_features = pca.fit_transform(hog_features.reshape(1,-1))
+        # hog_features = pca.fit_transform(hog_features.reshape(1,-1))
     # # Add the HOG features and label to the lists
+        print(hog_features.shape)
+        print(hog_features)
         features.append(hog_features)
 # descriptors = np.vstack(descriptors)
         # descriptors.append(des)
