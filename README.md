@@ -11,4 +11,9 @@
 - resize image (128,128)
 - use mask after YCrCb conversion
 
+## PCA & HOG 54.17%
+`pca_feature.py`
+- resize image (128,128)
+- use mask after YCrCb conversion
+
 
