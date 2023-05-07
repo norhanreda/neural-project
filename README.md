@@ -8,6 +8,10 @@
 - draw the hand on new image to cut some of unwanted background
 - resize new image (128,128)
 
+## HOG 78.728% -> classifier: Random forest
+`hog_random_forest.py`
+- same as `hog_cut.py` 
+
 
 ## HOG 72.37%
 `hog_opencv.py`
