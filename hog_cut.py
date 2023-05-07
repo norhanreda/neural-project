@@ -4,11 +4,13 @@ import numpy as np
 from sklearn import svm
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from sklearn.datasets import load_iris
+import joblib
 import cv2
 
 # Define the directory where the hand gesture images are stored
-dataset_dir = "dataset\Woman"
-# dataset_dir = "sample_data\Women"
+# dataset_dir = "dataset\Woman"
+dataset_dir = "dataset_sample\Women"
 
 labels = []
 features=[]
@@ -79,9 +81,12 @@ print('Shape of test_labels:', test_labels.shape)
 svm_classifier = svm.SVC(kernel="linear")
 svm_classifier.fit(train_features, train_labels)
 
-# Predict the labels of the test set using the trained SVM classifier
-predicted_labels = svm_classifier.predict(test_features)
+# Save the trained classifier to a file
+joblib.dump(svm_classifier, 'svm_classifier.joblib')
 
-# Compute the accuracy of the SVM classifier
-accuracy = accuracy_score(test_labels, predicted_labels)
-print("Accuracy: {:.4f}%".format(accuracy * 100))
+# # Predict the labels of the test set using the trained SVM classifier
+# predicted_labels = svm_classifier.predict(test_features)
+
+# # Compute the accuracy of the SVM classifier
+# accuracy = accuracy_score(test_labels, predicted_labels)
+# print("Accuracy: {:.4f}%".format(accuracy * 100))
