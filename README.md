@@ -28,4 +28,10 @@
 - resize image (128,128)
 - use mask after YCrCb conversion
 
-
+## HOG  50.22% -> classifier: decision tree
+`decison_tree.py`
+- resize image (128,128)
+- use mask after YCrCb conversion
+- get max contour 
+- draw the hand on new image to cut some of unwanted background
+- resize new image (128,128)
