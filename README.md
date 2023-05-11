@@ -12,6 +12,8 @@
 `hog_random_forest.py`
 - same as `hog_cut.py` 
 
+## HOG 65.1315% -> classifier: KNN (K=3)
+- same as `hog_cut.py` 
 
 ## HOG 72.37%
 `hog_opencv.py`
