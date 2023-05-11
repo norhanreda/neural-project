@@ -1,6 +1,6 @@
 # neural-project
 
-## HOG 80.0439%
+## HOG 80.0439% classifier: SVM
 `hog_cut.py`
 - resize image (128,128)
 - use mask after YCrCb conversion
@@ -12,7 +12,7 @@
 `hog_random_forest.py`
 - same as `hog_cut.py` 
 
-## HOG 78.28947368421053% -> classifier: mlp
+## HOG 78.28947368421053% -> classifier: MLP
 `hog_random_forest.py`
 - same as `hog_cut.py` 
 
