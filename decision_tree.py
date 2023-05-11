@@ -112,7 +112,7 @@ print('Shape of test_labels:', test_labels.shape)
 
 
 # Train a decision tree classifier
-clf = DecisionTreeClassifier(max_depth=200, criterion='entropy')
+clf = DecisionTreeClassifier(max_depth=1000, criterion='entropy')
 clf.fit(train_features, train_labels)
 
 # Predict the labels of the test set using the trained SVM classifier
