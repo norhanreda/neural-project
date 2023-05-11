@@ -1,6 +1,6 @@
 # neural-project
 
-## HOG 80.0439%
+## HOG 80.0439% classifier: SVM
 `hog_cut.py`
 - resize image (128,128)
 - use mask after YCrCb conversion
@@ -12,8 +12,6 @@
 `hog_random_forest.py`
 - same as `hog_cut.py` 
 
-## HOG 65.1315% -> classifier: KNN (K=3)
-- same as `hog_cut.py` 
 
 ## HOG 72.37%
 `hog_opencv.py`
@@ -30,4 +28,10 @@
 - resize image (128,128)
 - use mask after YCrCb conversion
 
-
+## HOG  50.22% -> classifier: decision tree
+`decison_tree.py`
+- resize image (128,128)
+- use mask after YCrCb conversion
+- get max contour 
+- draw the hand on new image to cut some of unwanted background
+- resize new image (128,128)
