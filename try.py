@@ -71,15 +71,15 @@ with open('results.txt', 'w') as r:
 
                 # Compute HOG features
                 hog_features = hog.compute(new_img)
-                # predicted_labels = clf.predict(hog_features.reshape(1, -1))
+                predicted_labels = clf.predict(hog_features.reshape(1, -1))
                 # Record the end time
                 end_time = time.time()
                 # Calculate the execution time
                 execution_time = end_time - start_time
                 print(f"Execution time: {execution_time:.2f} seconds")
 
-                # r.write(predicted_labels[0]+'\n')
-                # t.write(f"{execution_time:.3f}"+'\n')
+                r.write(predicted_labels[0]+'\n')
+                t.write(f"{execution_time:.3f}"+'\n')
             
                 features.append(hog_features)
                 labels.append(sub_dir)
