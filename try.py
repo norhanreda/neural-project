@@ -94,7 +94,7 @@ print(labels.shape)
 # Load the saved classifier from the file
 
 # Predict the labels of the test set using the trained SVM classifier
-predicted_labels = clf.predict(features.reshape(-1, 1))
+predicted_labels = clf.predict(features)
 # Compute the accuracy of the SVM classifier
 accuracy = accuracy_score(labels, predicted_labels)
 # Print the predicted labels
@@ -107,4 +107,4 @@ accuracy = accuracy_score(labels, predicted_labels)
 
 # Compute the accuracy of the SVM classifier
 # accuracy = accuracy_score(test_labels, predicted_labels)
-# print("Accuracy: {:.4f}%".format(accuracy * 100))
+print("Accuracy: {:.4f}%".format(accuracy * 100))
