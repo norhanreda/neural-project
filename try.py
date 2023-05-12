@@ -88,7 +88,7 @@ labels = np.array(labels)
 # Load the saved classifier from the file
 
 # Predict the labels of the test set using the trained SVM classifier
-predicted_labels = clf.predict(features)
+predicted_labels = clf.predict(features.reshape(1, -1))
 # Compute the accuracy of the SVM classifier
 accuracy = accuracy_score(labels, predicted_labels)
 # Print the predicted labels
