@@ -12,9 +12,6 @@
 `hog_random_forest.py`
 - same as `hog_cut.py` 
 
-## HOG 78.28947368421053% -> classifier: MLP
-`hog_random_forest.py`
-- same as `hog_cut.py` 
 
 ## HOG 72.37%
 `hog_opencv.py`
