@@ -18,7 +18,7 @@ import os
 from PIL import Image
 
 # Set the directory path that contains the images
-directory = "data"
+directory = "our_data\our"
 features=[]
 labels=[]
 # Define the HOG parameters
@@ -36,14 +36,17 @@ clf = joblib.load('svm_classifier.joblib')
 with open('results.txt', 'w') as r: 
     with open('time.txt', 'w') as t:
      for sub_dir in os.listdir(directory):
+      print(sub_dir)
       sub_dir_path = os.path.join(directory, sub_dir)
       if not os.path.isdir(sub_dir_path):
            continue
-      for filename in os.listdir(directory):
+      for filename in os.listdir(sub_dir_path):
             # Check if the file is an image
-            if filename.endswith(".jpg") or filename.endswith(".png") or filename.endswith(".jpeg"):
+            # print(filename)
+            if filename.endswith(".jpg") or filename.endswith(".jpeg"):
+                print('shit')
                 # Load the image file using Pillow
-                img_path = os.path.join(directory, filename)
+                img_path = os.path.join(sub_dir_path, filename)
                 image = cv2.imread(img_path)
                 image= cv2.resize(image,(128,128))
                 # Record the start time
@@ -85,10 +88,13 @@ with open('results.txt', 'w') as r:
 
 features = np.array(features)
 labels = np.array(labels)
+
+print(features.shape)
+print(labels.shape)
 # Load the saved classifier from the file
 
 # Predict the labels of the test set using the trained SVM classifier
-predicted_labels = clf.predict(features.reshape(1, -1))
+predicted_labels = clf.predict(features.reshape(-1, 1))
 # Compute the accuracy of the SVM classifier
 accuracy = accuracy_score(labels, predicted_labels)
 # Print the predicted labels
