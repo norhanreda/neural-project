@@ -45,6 +45,7 @@ from skimage.feature import local_binary_pattern
 from sklearn.decomposition import PCA
 # Define the directory where the hand gesture images are stored
 dataset_dir = "dataset\dataset\Woman"
+# dataset_dir = "dataset_sample\Women"
 images = []
 labels = []
 descriptors = []
@@ -84,6 +85,16 @@ for sub_dir in os.listdir(dataset_dir):
         lower_skin = np.array([0, 135, 85])
         upper_skin = np.array([255, 180, 135])
         mask = cv2.inRange(ycrcb, lower_skin, upper_skin)
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contour = max(contours, key = len)
+
+        min_x, min_y, w, h = cv2.boundingRect(contour)
+        new_img = np.zeros((h, w), dtype=np.uint8)
+
+        contour = contour - [min_x, min_y]
+        cv2.drawContours(new_img, [contour], 0, 255, -1)
+
+        new_img= cv2.resize(new_img,(128,128))
         
         # cv2.namedWindow('mask', cv2.WINDOW_NORMAL)
         # cv2.resizeWindow('mask', 800, 600)
@@ -121,7 +132,7 @@ for sub_dir in os.listdir(dataset_dir):
         # Compute HOG features
         hog_features = hog.compute(mask)
         print(len(hog_features))
-        hog_features=np.append( hog_features,img_pca)
+        hog_features=np.append( hog_features,X_pca)
         print(len(hog_features))
         features.append( hog_features)
         # features.append(img_pca)
@@ -138,7 +149,7 @@ labels = np.array(labels)
 
 print(labels.shape)
 train_features, test_features, train_labels, test_labels = train_test_split(
-    features, labels, test_size=0.25, random_state=42)
+    features, labels, test_size=0.1, random_state=22)
 
 print('Shape of train_images:', train_features.shape)
 print('Shape of train_labels:', train_labels.shape)
