@@ -13,10 +13,11 @@
 - same as `hog_cut.py` 
 
 ## HOG 78.28947368421053% -> classifier: MLP
-`hog_random_forest.py`
+`mlp.py`
 - same as `hog_cut.py` 
-
-
+## HOG 75.43859649122807% -> soft voting (classifier: MLP , RDF , SVM)
+`soft.py`
+- same as `hog_cut.py` 
 ## HOG 72.37%
 `hog_opencv.py`
 - resize image (128,128)
