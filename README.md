@@ -18,7 +18,7 @@ The project includes the following key modules:
 - Training and Evaluation: We split the dataset into training and validation sets. The model is trained using the training set, and the hyperparameters are fine-tuned to optimize performance. The validation set is used to evaluate the model's accuracy, precision, recall, and F1-score. Iterative training and evaluation help improve the model's performance.
 
 ## Accuracies <a name = "Accuracies"></a>
-### - HOG 80.0439% classifier: SVM
+### HOG 80.0439% classifier: SVM
   `hog_cut.py`
   - resize image (128,128)
   - use mask after YCrCb conversion
@@ -26,35 +26,35 @@ The project includes the following key modules:
   - draw the hand on new image to cut some of unwanted background
   - resize new image (128,128)
 
-### - HOG 80.0439% classifier: SVM and adaboost
+### HOG 80.0439% classifier: SVM and adaboost
   `adaboost.py`
 
-### - HOG 78.728% -> classifier: Random forest
+### HOG 78.728% -> classifier: Random forest
   `hog_random_forest.py`
   - same as `hog_cut.py` 
 
-### - HOG 78.28947368421053% -> classifier: MLP
+### HOG 78.28947368421053% -> classifier: MLP
   `mlp.py`
   - same as `hog_cut.py` 
-### - HOG 75.43859649122807% -> soft voting (classifier: MLP , RDF , SVM)
+### HOG 75.43859649122807% -> soft voting (classifier: MLP , RDF , SVM)
   `soft.py`
   - same as `hog_cut.py` 
-### - HOG 72.37%
+### HOG 72.37%
   `hog_opencv.py`
   - resize image (128,128)
   - use mask after YCrCb conversion
 
-### - HOG & LBP 63.4%
+### HOG & LBP 63.4%
   `lbp.py`
   - resize image (128,128)
   - use mask after YCrCb conversion
 
-### - PCA & HOG 54.17%
+### PCA & HOG 54.17%
   `pca_feature.py`
   - resize image (128,128)
   - use mask after YCrCb conversion
 
-### - HOG  50.22% -> classifier: decision tree
+### HOG  50.22% -> classifier: decision tree
   `decison_tree.py`
   - resize image (128,128)
   - use mask after YCrCb conversion
@@ -62,7 +62,7 @@ The project includes the following key modules:
   - draw the hand on new image to cut some of unwanted background
   - resize new image (128,128)
 
-### - sift  44% -> classifier: svm
+### sift  44% -> classifier: svm
   `.py`
 
 ## Contributors <a name = "Contributors"></a>
