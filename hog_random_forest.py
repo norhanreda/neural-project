@@ -6,9 +6,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.datasets import make_classification
 from sklearn.ensemble import RandomForestClassifier
 import cv2
-
+import joblib
 # Define the directory where the hand gesture images are stored
-dataset_dir = "dataset\Woman"
+dataset_dir = "dataset\dataset\Woman"
 # dataset_dir = "sample_data\Women"
 
 labels = []
@@ -36,7 +36,7 @@ for sub_dir in os.listdir(dataset_dir):
         image_path = os.path.join(sub_dir_path, file_name)
 
         image = cv2.imread(image_path)
-        image= cv2.resize(image,(128,128))
+        # image= cv2.resize(image,(128,128))
 
         ycrcb = cv2.cvtColor(image, cv2.COLOR_BGR2YCrCb)
         mask = cv2.inRange(ycrcb, lower_skin, upper_skin)
@@ -77,12 +77,13 @@ print('Shape of train_labels:', y_train.shape)
 print('Shape of test_images:', X_test.shape)
 print('Shape of test_labels:', y_test.shape)
 
-# Create a Random Forest Classifier with 100 trees
-rfc = RandomForestClassifier(n_estimators=200, random_state=42)
+# Create a Random Forest Classifier with 500 trees
+rfc = RandomForestClassifier(n_estimators=500, random_state=42)
 
 # Train the model on the training set
 rfc.fit(X_train, y_train)
-
+# Save the trained classifier to a file
+joblib.dump(rfc, 'random_forest.joblib')
 # Make predictions on the testing set
 y_pred = rfc.predict(X_test)
 
