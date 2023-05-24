@@ -28,6 +28,7 @@ The project includes the following key modules:
 
 ![image](https://github.com/norhanreda/neural-project/assets/88630231/e8183cf4-e691-4c59-92d2-d01730f2f716)
 
+![image](https://github.com/norhanreda/neural-project/assets/88630231/4dd64555-f097-4605-9129-90a01dce3fbe)
 
 
 
