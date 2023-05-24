@@ -21,6 +21,10 @@ The project includes the following key modules:
 ## Project Pipeline <a name = "Project-Pipeline"></a>
 ![image](https://github.com/norhanreda/neural-project/assets/88630231/0c6708f2-c1e7-49d1-8fcd-cb993f2b963f)
 
+## Hand Mask <a name = "Hand-mask"></a>
+
+![image](https://github.com/norhanreda/neural-project/assets/88630231/b008309a-644e-4708-88dd-e14ad8ee0f3d)
+
 
 ## Accuracies <a name = "Accuracies"></a>
 ![image](https://github.com/norhanreda/neural-project/assets/88630231/8a2188bf-9702-4a75-8e70-e4610d9d6510)
