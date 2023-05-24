@@ -30,6 +30,9 @@ The project includes the following key modules:
 
 ## Accuracies <a name = "Accuracies"></a>
 ![image](https://github.com/norhanreda/neural-project/assets/88630231/e4a00611-4125-4073-a80d-614043e5d0be)
+
+![image](https://github.com/norhanreda/neural-project/assets/88630231/451c78d2-028b-40c8-8ba7-e4e0e4e55243)
+
 ![image](https://github.com/norhanreda/neural-project/assets/88630231/7db8e5eb-c469-47f7-96ca-aed9d90fb022)
 
 
