@@ -2,6 +2,8 @@
 
 - [About ](#about-)
 - [Description ](#Description-)
+- [Project_Pipeline ](#Project Pipeline-)
+- [Hand_mask ](#Hand_mask-)
 - [Accuracies ](#Accuracies-)
 - [Contributors ](#contributors-)
 
@@ -16,54 +18,15 @@ The project includes the following key modules:
 - Feature Extraction: Here we used different features and calculate their efficiency in detecting digits, These features serve as input for the subsequent classification module.
 - Classification Model: We train a machine learning model to classify hand gestures into the six digit categories (0 to 5). Various classification algorithms can be employed, such as Support Vector Machines (SVMs), or Random Forests. The model is trained using the preprocessed images and their corresponding labels.
 - Training and Evaluation: We split the dataset into training and validation sets. The model is trained using the training set, and the hyperparameters are fine-tuned to optimize performance. The validation set is used to evaluate the model's accuracy, precision, recall, and F1-score. Iterative training and evaluation help improve the model's performance.
+## Project Pipeline<a name = "Project Pipeline"></a>
+![image](https://github.com/norhanreda/neural-project/assets/88630231/0c6708f2-c1e7-49d1-8fcd-cb993f2b963f)
+
 
 ## Accuracies <a name = "Accuracies"></a>
-### HOG 80.0439% classifier: SVM
-  `hog_cut.py`
-  - resize image (128,128)
-  - use mask after YCrCb conversion
-  - get max contour 
-  - draw the hand on new image to cut some of unwanted background
-  - resize new image (128,128)
+![image](https://github.com/norhanreda/neural-project/assets/88630231/8a2188bf-9702-4a75-8e70-e4610d9d6510)
 
-### HOG 80.0439% classifier: SVM and adaboost
-  `adaboost.py`
+![image](https://github.com/norhanreda/neural-project/assets/88630231/3fa005ab-6e65-41f9-8eb1-0d5c878d8600)
 
-### HOG 78.728% -> classifier: Random forest
-  `hog_random_forest.py`
-  - same as `hog_cut.py` 
-
-### HOG 78.28947368421053% -> classifier: MLP
-  `mlp.py`
-  - same as `hog_cut.py` 
-### HOG 75.43859649122807% -> soft voting (classifier: MLP , RDF , SVM)
-  `soft.py`
-  - same as `hog_cut.py` 
-### HOG 72.37%
-  `hog_opencv.py`
-  - resize image (128,128)
-  - use mask after YCrCb conversion
-
-### HOG & LBP 63.4%
-  `lbp.py`
-  - resize image (128,128)
-  - use mask after YCrCb conversion
-
-### PCA & HOG 54.17%
-  `pca_feature.py`
-  - resize image (128,128)
-  - use mask after YCrCb conversion
-
-### HOG  50.22% -> classifier: decision tree
-  `decison_tree.py`
-  - resize image (128,128)
-  - use mask after YCrCb conversion
-  - get max contour 
-  - draw the hand on new image to cut some of unwanted background
-  - resize new image (128,128)
-
-### sift  44% -> classifier: svm
-  `.py`
 
 ## Contributors <a name = "Contributors"></a>
 
