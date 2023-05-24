@@ -24,7 +24,10 @@ The project includes the following key modules:
 
 ## Hand Mask <a name = "Hand-mask"></a>
 
-![image](https://github.com/norhanreda/neural-project/assets/88630231/3ced6fef-6839-44b2-a890-b687f13207fc)
+![image](https://github.com/norhanreda/neural-project/assets/88630231/6f4da595-cde5-4f08-9f39-b798c4926c84)
+
+![image](https://github.com/norhanreda/neural-project/assets/88630231/e8183cf4-e691-4c59-92d2-d01730f2f716)
+
 
 
 
