@@ -18,7 +18,7 @@ The project includes the following key modules:
 - Feature Extraction: Here we used different features and calculate their efficiency in detecting digits, These features serve as input for the subsequent classification module.
 - Classification Model: We train a machine learning model to classify hand gestures into the six digit categories (0 to 5). Various classification algorithms can be employed, such as Support Vector Machines (SVMs), or Random Forests. The model is trained using the preprocessed images and their corresponding labels.
 - Training and Evaluation: We split the dataset into training and validation sets. The model is trained using the training set, and the hyperparameters are fine-tuned to optimize performance. The validation set is used to evaluate the model's accuracy, precision, recall, and F1-score. Iterative training and evaluation help improve the model's performance.
-## Project Pipeline<a name = "Project-Pipeline"></a>
+## Project Pipeline <a name = "Project-Pipeline"></a>
 ![image](https://github.com/norhanreda/neural-project/assets/88630231/0c6708f2-c1e7-49d1-8fcd-cb993f2b963f)
 
 
