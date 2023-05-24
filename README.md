@@ -19,17 +19,21 @@ The project includes the following key modules:
 - Classification Model: We train a machine learning model to classify hand gestures into the six digit categories (0 to 5). Various classification algorithms can be employed, such as Support Vector Machines (SVMs), or Random Forests. The model is trained using the preprocessed images and their corresponding labels.
 - Training and Evaluation: We split the dataset into training and validation sets. The model is trained using the training set, and the hyperparameters are fine-tuned to optimize performance. The validation set is used to evaluate the model's accuracy, precision, recall, and F1-score. Iterative training and evaluation help improve the model's performance.
 ## Project Pipeline <a name = "Project-Pipeline"></a>
-![image](https://github.com/norhanreda/neural-project/assets/88630231/0c6708f2-c1e7-49d1-8fcd-cb993f2b963f)
+![image](https://github.com/norhanreda/neural-project/assets/88630231/4cf77ad4-77b3-410b-8167-dbbb799cc460)
+
 
 ## Hand Mask <a name = "Hand-mask"></a>
 
-![image](https://github.com/norhanreda/neural-project/assets/88630231/b008309a-644e-4708-88dd-e14ad8ee0f3d)
+![image](https://github.com/norhanreda/neural-project/assets/88630231/3ced6fef-6839-44b2-a890-b687f13207fc)
+
 
 
 ## Accuracies <a name = "Accuracies"></a>
-![image](https://github.com/norhanreda/neural-project/assets/88630231/8a2188bf-9702-4a75-8e70-e4610d9d6510)
+![image](https://github.com/norhanreda/neural-project/assets/88630231/e4a00611-4125-4073-a80d-614043e5d0be)
+![image](https://github.com/norhanreda/neural-project/assets/88630231/7db8e5eb-c469-47f7-96ca-aed9d90fb022)
 
-![image](https://github.com/norhanreda/neural-project/assets/88630231/3fa005ab-6e65-41f9-8eb1-0d5c878d8600)
+
+
 
 
 ## Contributors <a name = "Contributors"></a>
