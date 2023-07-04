@@ -5,7 +5,6 @@
 - [Project Pipeline ](#Project-Pipeline-)
 - [Hand mask ](#Hand-mask-)
 - [Accuracies ](#Accuracies-)
-- [Competition ](#Competition-)
 - [Contributors ](#contributors-)
 
 ## About <a name = "about"></a>
@@ -41,8 +40,7 @@ The project includes the following key modules:
 ![image](https://github.com/norhanreda/neural-project/assets/88630231/7db8e5eb-c469-47f7-96ca-aed9d90fb022)
 
 
-## Competition
-we are ranked the 4th team out of 20 teams and got a test accuracy of 68 %
+
 
 
 ## Contributors <a name = "Contributors"></a>
